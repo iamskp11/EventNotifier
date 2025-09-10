@@ -1,80 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#12F6B4"
-    android:scrollbarAlwaysDrawHorizontalTrack="false"
-    android:scrollbars="none">
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="12dp">
 
-    <TextView
-        android:id="@+id/adap_name"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:fontFamily="sans-serif-black"
-        android:text="TextView"
-        android:textAllCaps="true"
-        android:textColor="#121012"
-        android:textSize="26sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/adap_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="monospace"
-        android:text="TextView"
-        android:textColor="#DF1A5F"
-        android:textColorHint="#B589918A"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.935"
-        app:layout_constraintStart_toEndOf="@+id/adap_eventtype"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.508" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-    <TextView
-        android:id="@+id/adap_eventtype"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:fontFamily="cursive"
-        android:text="TextView"
-        android:textColor="#6D2CF3"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adap_name" />
+            <TextView
+                android:id="@+id/adap_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name"
+                android:textStyle="bold"
+                android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/adap_comingup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        android:textColor="#E38D20"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.012"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adap_eventtype" />
+            <TextView
+                android:id="@+id/adap_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nickname"
+                android:textColor="@android:color/darker_gray" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/del"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Delete"
-        android:textColor="#C4C6C8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.012"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adap_comingup" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/adap_eventtype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Event Type"
+            android:textColor="@android:color/holo_blue_dark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/adap_comingup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="In 5 days"
+                android:textSize="16sp"
+                android:textColor="@android:color/holo_orange_dark" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/del"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete" />
+        </LinearLayout>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
