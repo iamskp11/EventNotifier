@@ -173,8 +173,25 @@ public class MainActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT);
                     toast.show();
 
-                    Event e = new Event(name, nick_name, event_type, Integer.parseInt(date),
-                            Integer.parseInt(month), Integer.parseInt(year));
+                    boolean isEdit = data.getBooleanExtra("is_edit", false);
+                    if (isEdit) {
+                        // Delete original then insert updated
+                        String oName = data.getStringExtra("orig_name");
+                        String oNick = data.getStringExtra("orig_nick_name");
+                        String oType = data.getStringExtra("orig_event_type");
+                        String oDate = data.getStringExtra("orig_date");
+                        String oMonth = data.getStringExtra("orig_month");
+                        String oYear = data.getStringExtra("orig_year");
+                        if (oName != null && oNick != null && oType != null && oDate != null && oMonth != null
+                                && oYear != null) {
+                            Event orig = new Event(oName, oNick, oType, Integer.parseInt(oDate),
+                                    Integer.parseInt(oMonth), Integer.parseInt(oYear));
+                            handler.deleteEvent(orig);
+                        }
+                    }
+
+                    Event e = new Event(name, nick_name, event_type, Integer.parseInt(date), Integer.parseInt(month),
+                            Integer.parseInt(year));
                     handler.AddEvents(e);
                     query_db();
                 }

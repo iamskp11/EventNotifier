@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import android.app.Activity;
+import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,6 +49,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
         TextView tv_eventtype = convertView.findViewById(R.id.adap_eventtype);
         TextView tv_comingup = convertView.findViewById(R.id.adap_comingup);
         Button del = convertView.findViewById(R.id.del);
+        View btnEdit = convertView.findViewById(R.id.btn_edit);
 
         del.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +58,27 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
             }
         });
+
+        if (btnEdit != null) {
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Event current = getItem(position);
+                    Intent intent = new Intent(getContext(), MainActivity2.class);
+                    intent.putExtra("mode", "edit");
+                    intent.putExtra("orig_name", current.name);
+                    intent.putExtra("orig_nick_name", current.nick_name);
+                    intent.putExtra("orig_event_type", current.event_type);
+                    intent.putExtra("orig_date", Integer.toString(current.date));
+                    intent.putExtra("orig_month", Integer.toString(current.month));
+                    intent.putExtra("orig_year", Integer.toString(current.year));
+
+                    if (context instanceof Activity) {
+                        ((Activity) context).startActivityForResult(intent, 1);
+                    }
+                }
+            });
+        }
 
         Event curr = getItem(position);
 

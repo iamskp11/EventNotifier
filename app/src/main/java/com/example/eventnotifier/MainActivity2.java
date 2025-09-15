@@ -78,6 +78,41 @@ public class MainActivity2 extends AppCompatActivity {
         month.setOnClickListener(openDatePicker);
         year.setOnClickListener(openDatePicker);
 
+        // Pre-fill in edit mode
+        Intent incoming = getIntent();
+        String mode = incoming.getStringExtra("mode");
+        if (mode != null && mode.equals("edit")) {
+            String origName = incoming.getStringExtra("orig_name");
+            String origNick = incoming.getStringExtra("orig_nick_name");
+            String origType = incoming.getStringExtra("orig_event_type");
+            String origDate = incoming.getStringExtra("orig_date");
+            String origMonth = incoming.getStringExtra("orig_month");
+            String origYear = incoming.getStringExtra("orig_year");
+
+            if (origName != null)
+                name.setText(origName);
+            if (origNick != null)
+                nickname.setText(origNick);
+            if (origType != null) {
+                if ("Birthday".equalsIgnoreCase(origType))
+                    bday.setChecked(true);
+                else
+                    anniversary.setChecked(true);
+            }
+            if (origDate != null) {
+                try {
+                    int d = Integer.parseInt(origDate);
+                    date.setText(origDate);
+                    date.setTag(Integer.valueOf(d));
+                } catch (NumberFormatException ignore) {
+                }
+            }
+            if (origMonth != null)
+                month.setText(origMonth);
+            if (origYear != null)
+                year.setText(origYear);
+        }
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -149,6 +184,16 @@ public class MainActivity2 extends AppCompatActivity {
                     intent.putExtra("date", Integer.toString(event_date));
                     intent.putExtra("month", Integer.toString(event_month));
                     intent.putExtra("year", Integer.toString(event_year));
+                    // Pass through original identifiers when editing so caller can match
+                    if (mode != null && mode.equals("edit")) {
+                        intent.putExtra("is_edit", true);
+                        intent.putExtra("orig_name", getIntent().getStringExtra("orig_name"));
+                        intent.putExtra("orig_nick_name", getIntent().getStringExtra("orig_nick_name"));
+                        intent.putExtra("orig_event_type", getIntent().getStringExtra("orig_event_type"));
+                        intent.putExtra("orig_date", getIntent().getStringExtra("orig_date"));
+                        intent.putExtra("orig_month", getIntent().getStringExtra("orig_month"));
+                        intent.putExtra("orig_year", getIntent().getStringExtra("orig_year"));
+                    }
                     setResult(RESULT_OK, intent);
                     finish();
                 }
